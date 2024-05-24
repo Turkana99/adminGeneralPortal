@@ -1,76 +1,84 @@
 <div class="container-fluid d-flex login">
   <div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-12 left d-flex justify-content-center align-items-center">
-      <div class="px-5">
-        <h1>Azərbaycan Respublikasının Fövqəladə Hallar Nazirliyi</h1>
-        <p>
-          Azərbaycan Respublikasının ərazisində fəaliyyətdə olan Təhlükə
-          Potensiallı Obyektlərin Dövlət Reyestri
-        </p>
-      </div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-12 right d-flex justify-content-center align-items-center">
-      <div class="w-50">
-        <h2 class="pb-3">Giriş</h2>
-        <form class="w-100 login-form d-flex flex-column" [formGroup]="loginForm">
-          <span class="p-input-icon-left">
-            <i class="fa-regular fa-envelope"></i>
-            <input
-              type="email"
-              pInputText
-              placeholder="İstifadəçi adı"
-              formControlName="email"
-            />
-          </span>
-          <div
-            class="validationMessage py-1"
-            *ngIf="
-            loginForm.get('email')?.errors?.['required'] &&
-            loginForm.get('email')?.touched
-          "
-          >
-            <p class="p-0 m-0">*İstifadəçi adı boş ola bilməz.</p>
-          </div>
-          <div
-            class="validationMessage py-1"
-            *ngIf="
-          loginForm.get('email')?.errors?.['email'] &&
-          loginForm.get('email')?.touched
-        "
-          >
-            <p class="p-0 m-0">*İstifadəçi adını düzgün formada daxil edin.</p>
-          </div>
-          <br />
-          <span class="p-input-icon-left">
-            <i class="fa-solid fa-lock"></i>
-            <input
-            id="txtPassword"
-              type="password"
-              pInputText
-              placeholder="Şifrə"
-              formControlName="password"
-            />
-          </span>
-          <div
+    <div
+    class="col-lg-6 col-md-6 col-sm-12 right d-flex justify-content-center align-items-center"
+  >
+    <div class="w-50">
+      <h2 class="pb-3">Giriş</h2>
+      <form
+        class="w-100 login-form d-flex flex-column"
+        [formGroup]="loginForm"
+      >
+        <span class="p-input-icon-left">
+          <i class="fa-regular fa-envelope"></i>
+          <input
+            type="email"
+            pInputText
+            placeholder="İstifadəçi adı"
+            formControlName="email"
+          />
+        </span>
+        <div
           class="validationMessage py-1"
           *ngIf="
-          loginForm.get('password')?.errors?.['required'] &&
-          loginForm.get('password')?.touched
+          loginForm.get('email')?.errors?.['required'] &&
+          loginForm.get('email')?.touched
         "
+        >
+          <p class="p-0 m-0">*İstifadəçi adı boş ola bilməz.</p>
+        </div>
+        <div
+          class="validationMessage py-1"
+          *ngIf="
+        loginForm.get('email')?.errors?.['email'] &&
+        loginForm.get('email')?.touched
+      "
+        >
+          <p class="p-0 m-0">*İstifadəçi adını düzgün formada daxil edin.</p>
+        </div>
+        <br />
+        <span class="p-input-icon-left">
+          <i class="fa-solid fa-lock"></i>
+          <input
+            id="txtPassword"
+            type="password"
+            pInputText
+            placeholder="Şifrə"
+            formControlName="password"
+          />
+        </span>
+        <div
+          class="validationMessage py-1"
+          *ngIf="
+        loginForm.get('password')?.errors?.['required'] &&
+        loginForm.get('password')?.touched
+      "
         >
           <p class="p-0 m-0">*Şifrə boş ola bilməz.</p>
         </div>
-          <br />
-          <a class="forgotPass d-flex justify-content-end" (click)="openDialog()"
-            >Şifrənizi unutmusunuz?</a
-          >
-          <br />
-          
-          <p-button
-            label="Daxil ol"
-            (click)="authService.login('name', 'password')"
-          ></p-button>
-        </form>
+        <br />
+        <a
+          class="forgotPass d-flex justify-content-end"
+          (click)="openDialog()"
+          >Şifrənizi unutmusunuz?</a
+        >
+        <br />
+
+        <p-button
+          label="Daxil ol"
+          (click)="authService.login('name', 'password')"
+        ></p-button>
+      </form>
+    </div>
+  </div>
+    <div
+      class="col-lg-6 col-md-6 col-sm-12 left d-flex justify-content-center align-items-center"
+    >
+      <div class="px-5">
+        <h1>
+          Azərbaycan Respublikası Fövqəladə Hallar Nazirliyinin Proqram
+          təminatlarının Vahid Portalı
+        </h1>
       </div>
     </div>
   </div>

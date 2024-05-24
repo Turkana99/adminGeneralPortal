@@ -1,36 +1,18 @@
-<div class="header d-flex justify-content-between align-items-center mt-2 px-0">
-  <button class="hamburger-icon me-2" (click)="toggleSidebar()">
-    <i class="fa fa-bars"></i>
+<div class="header d-flex justify-content-end mt-2">
+  <button
+    mat-button
+    [matMenuTriggerFor]="menu"
+    disableRipple
+    class="no-hover-effect"
+  >
+    <i class="fa-solid fa-user"></i> Türkanə Məmmədova
   </button>
-  <div class="flex-fill pe-3">
-    <span class="p-input-icon-left w-100">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" pInputText placeholder="Axtarış" />
-    </span>
-  </div>
-
-  <div class="d-flex align-items-center">
-    <div class="notification">
-      <i class="fa-solid fa-bell"></i>
-    </div>
-    <div>
-      <button
-        mat-button
-        [matMenuTriggerFor]="menu"
-        disableRipple
-        class="no-hover-effect"
-      >
-        Turkana Mammadova
-        <img src="../../../assets/images/userImg.png" alt="" />
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <i class="fa-solid fa-key me-1"></i> Şifrəni yenilə
-        </button>
-        <button mat-menu-item (click)="authService.logout()" class="exit">
-          <i class="fa-solid fa-right-from-bracket me-1"></i> Çıxış
-        </button>
-      </mat-menu>
-    </div>
-  </div>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="openDialog(userId)">
+      <i class="fa-solid fa-key me-1"></i> Şifrəni yenilə
+    </button>
+    <button mat-menu-item (click)="authService.logout()" class="exit">
+      <i class="fa-solid fa-right-from-bracket me-1"></i> Çıxış
+    </button>
+  </mat-menu>
 </div>

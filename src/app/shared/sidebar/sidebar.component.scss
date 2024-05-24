@@ -1,342 +1,124 @@
-@import "../../../styles/variables.scss";
+//Basics
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "Lato", sans-serif;
+  line-height: 1;
+}
+.fhnLogo {
+  width: 65px;
+  height: 65px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+//Color Variables
+$sidebar-background-color: #313443;
+$active-sidebar-link-color: #22252e;
+$hover-sidebar-link-color: $active-sidebar-link-color;
+$active-link-color: #98d7ec;
+$tooltip-background-color: $sidebar-background-color;
 
-//Sidebar active
-.sidebar.active {
-  background-color: white !important;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  z-index: 1000;
-  position: fixed;
-  overflow: hidden;
-  min-width: 340px;
-  transition: min-width 300ms;
+.change-color-1,
+.change-color-2,
+.change-color-3,
+.change-color-4,
+.change-color-5,
+.change-color-6 {
+  fill: #ffff;
+}
+.router-link-active {
+  img {
+    filter: invert(50%) sepia(100%) saturate(1000%) hue-rotate(180deg);
+  }
+}
+
+.sidebar-navigation {
+  display: block;
   height: 100%;
-  font-family: "Poppins", sans-serif;
-  border: none;
-  overflow-y: auto;
-  .logo {
-    h5 {
-      text-align: center;
-      font-weight: bold;
-      font-size: 18px;
-      color: $title-color;
-      font-family: "Poppins", sans-serif;
-    }
-    p {
-      text-align: center;
-      font-weight: 400;
-      font-size: 12px;
-      color: $title-color;
-      font-family: "Poppins", sans-serif;
-    }
-  }
-  ul li {
-    border-radius: 8px;
-    transition: border-radius 200ms;
-    cursor: pointer;
-    outline: none;
-    div {
-      margin: 0;
-    }
-  }
-  .images {
-    width: 30px;
-    padding: 0px;
-    margin: 0px;
-  }
-  .bg-hover {
-    border-radius: 8px;
-  }
-  .bg-hover:hover {
-    background-color: $sidebar-hover;
-    outline: none;
-    color: $main-color;
-    transition: 300ms;
-    .first {
-      display: none;
-    }
-    .second {
-      display: block;
-      transition: 00ms;
-    }
-  }
-  .dropdown {
-    padding-left: 53px;
-    display: block;
+  width: 80px;
+  background-color: $sidebar-background-color;
+  ul {
+    text-align: center;
+    color: white !important;
+
     li {
-      font-size: 14px;
-      padding: 6px 0px;
-      list-style-type: disc;
-    }
-    li:hover {
-      color: $main-color;
-    }
-  }
-  li > div:first-child {
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    font-size: 16px;
-    width: 60px;
-    transition: background-color 200ms;
-  }
-  .line {
-    background-color: $main-color;
-    border-radius: 12px;
-    visibility: hidden;
-  }
-  li > div:last-child {
-    padding: 0;
-    font-size: 15px;
-    white-space: nowrap;
-    overflow: hidden;
-    transition: background-color 200ms, padding 200ms, width 200ms;
-  }
-  .second {
-    display: none;
-  }
-  .mat-expansion-panel:not([class*="mat-elevation-z"]) {
-    box-shadow: none;
-    border-radius: 8px;
-  }
-  ::ng-deep .mat-expansion-panel-header-title {
-    font-size: 15px;
-    font-weight: 400;
-    font-family: "Poppins", sans-serif;
-    display: block;
-    .title p {
-      padding-top: 11px;
-      font-size: 15px !important;
-      font-weight: 400;
-      font-family: "Poppins", sans-serif;
-    }
-  }
-  ::ng-deep .mat-expansion-panel:hover {
-    background-color: $sidebar-hover;
-    ::ng-deep .mat-expansion-panel-header-title {
-      color: $main-color;
-      font-weight: 400;
-      i {
-        color: $main-color;
+      padding: 25px 0;
+      width: 100%;
+      cursor: pointer;
+      transition: all ease-out 120ms;
+
+      .sidebar-icon1 {
+        width: 40px;
+        height: 40px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
-      .second {
+
+      .sidebar-icon2 {
+        width: 30px;
+        height: 30px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .sidebar-icon3 {
+        width: 37px;
+        height: 37px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .tooltip {
         display: block;
+        position: absolute;
+        background-color: #212529;
+        padding: 10px 20px;
+        border-radius: 3px;
+        margin-top: -26px;
+        left: 90px;
+        opacity: 0;
+        visibility: hidden;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+
+        &:before {
+          content: "";
+          display: block;
+          position: absolute;
+          left: -4px;
+          top: 10px;
+          transform: rotate(45deg);
+          width: 10px;
+          height: 10px;
+          background-color: inherit;
+        }
       }
-      .first {
-        display: none;
+
+      &:hover {
+        background-color: $hover-sidebar-link-color;
+
+        .tooltip {
+          visibility: visible;
+          opacity: 1;
+        }
       }
-    }
-  }
-  .router-link-active {
-    font-weight: bold !important;
-    outline: none;
-    color: $main-color;
-    // .bg-hover {
-    //   background-color: $sidebar-hover !important;
-    // }
-    .second {
-      display: block;
-    }
-    .first {
-      display: none;
-    }
-    .line {
-      visibility: visible;
-    }
-  }
-  .router-link-active2 {
-    .second {
-      display: block;
-    }
-    .first {
-      display: none;
-    }
-    .line {
-      visibility: visible;
-    }
-    ::ng-deep .mat-expansion-panel-header {
-      .title p {
-        color: $main-color;
-        font-weight: bold;
+
+      &.active {
+        background-color: $active-sidebar-link-color;
+
+        svg {
+          fill: $active-link-color;
+        }
       }
-    }
-    // .mat-expansion-panel:not([class*="mat-elevation-z"]) {
-    //   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    // }
-  }
-  .router-link-activeLi {
-    color: $main-color;
-  }
-  .collapse {
-    ul {
-      list-style-type: disc;
-      color: black;
-      font-weight: normal;
-      padding: 0px 100px 0px 100px;
     }
   }
 }
-
-//Sidebar not active
-.sidebar:not(.active) {
-  svg {
-    margin-left: 20px;
-  }
-  h5,
-  p {
-    display: none;
-    transition: display 300ms;
-  }
-  background-color: white !important;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  z-index: 1000;
-  min-width: 40px !important;
-  position: fixed;
-  overflow: hidden;
-  transition: min-width 300ms;
-  height: 100%;
-  font-family: "Poppins", sans-serif;
-  border: none;
-  overflow-y: auto;
-  ul li {
-    border-radius: 8px;
-    transition: border-radius 200ms;
-    cursor: pointer;
-    outline: none;
-    div {
-      margin: 0;
-    }
-  }
-  .images {
-    width: 30px;
-    padding-left: 4px;
-  }
-  .bg-hover {
-    border-radius: 8px;
-  }
-  .bg-hover:hover {
-    background-color: $sidebar-hover;
-    outline: none;
-    color: $main-color;
-    transition: 300ms;
-    .first {
-      display: none;
-      transition: display 300ms;
-    }
-    .second {
-      display: block;
-      transition: 00ms;
-      transition: display 300ms;
-    }
-  }
-  .sd-text {
-    display: none;
-    text-decoration: none;
-  }
-  li > div:first-child {
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    font-size: 16px;
-    transition: background-color 200ms;
-  }
-  .line {
-    background-color: $main-color;
-    border-radius: 12px;
-    visibility: hidden;
-  }
-  li > div:last-child {
-    padding: 0;
-    font-size: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    transition: background-color 200ms, padding 200ms, width 200ms;
-  }
-  .second {
-    display: none;
-    transition: display 300ms;
-  }
-  .mat-expansion-panel:not([class*="mat-elevation-z"]) {
-    box-shadow: none;
-    border-radius: 8px;
-  }
-  ::ng-deep .mat-expansion-panel-header .title {
-    display: none!important;
-  }
-  ::ng-deep .mat-expansion-panel:hover {
-    background-color: $sidebar-hover;
-    ::ng-deep .mat-expansion-panel-header-title {
-      color: $main-color;
-      font-weight: 400;
-      i {
-        color: $main-color;
-      }
-      .second {
-        display: block;
-      }
-      .first {
-        display: none;
-      }
-    }
-  }
-  .dropdown {
-    display: none;
-  }
-  .router-link-active {
-    font-weight: bold !important;
-    outline: none;
-    color: $main-color;
-    a {
-      text-decoration: none !important;
-    }
-    // .bg-hover {
-    //   background-color: $sidebar-hover !important;
-    // }
-    .second {
-      display: block;
-    }
-    .first {
-      display: none;
-    }
-    .line {
-      visibility: visible;
-    }
-  }
-  .router-link-active2 {
-    .second {
-      display: block;
-    }
-    .first {
-      display: none;
-    }
-    .line {
-      visibility: visible;
-    }
-    .title p {
-      display: none;
-    }
-
-    // .mat-expansion-panel:not([class*="mat-elevation-z"]) {
-    //   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    // }
-  }
-  .collapse {
-    &:not(.show) {
-      display: none;
-    }
-  }
-  .collapsing {
-    height: 0;
-    overflow: hidden;
-  }
-  .collapse {
-    transition: height 0.5s ease; /* Adjust the duration and timing function as needed */
-  }
-  ::ng-deep .mat-expansion-indicator {
-    display: none;
-  }
-  ::ng-deep .mat-content.mat-content-hide-toggle{
-    margin: 0px!important;
-    padding: 0px!important;
-  }
-}
-

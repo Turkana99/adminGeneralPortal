@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CabinetRoutingModule } from './cabinet-routing.module';
 import { CabinetComponent } from './cabinet.component';
-import { AuthService } from '../core/services/auth.service';
-import { AuthGuard } from '../core/guards/auth.guard';
-import { MainComponent } from './components/main/main.component';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { MaterialModule } from '../material.module';
@@ -14,27 +11,25 @@ import { FooterComponent } from '../shared/footer/footer.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { InputTextModule } from 'primeng/inputtext';
 import { AccordionModule } from 'primeng/accordion';
-import { AppRoutingModule } from '../app-routing.module';
-import { SidebarResComponent } from '../shared/sidebar-res/sidebar-res.component';
-import { NgApexchartsModule } from "ng-apexcharts";
-import { Charts1Component } from './components/charts/charts1/charts1.component';
-import { Chart2Component } from './components/charts/chart2/chart2.component';
-import { ChartModule } from 'primeng/chart';
-import { RegisterDocsComponent } from './components/register-docs/register-docs.component';
-import { LegalIndividualPersonComponent } from './components/legal-individual-person/legal-individual-person.component';
+import { StaticInfoComponent } from './components/static-info/static-info.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProjectsService } from '../core/services/projects.service';
+import { CategoriesService } from '../core/services/categories.service';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { StaticInfoService } from '../core/services/staticInfo.service';
 
 @NgModule({
   declarations: [
     CabinetComponent,
-    MainComponent,
     SidebarComponent,
     HeaderComponent,
     FooterComponent,
-    SidebarResComponent,
-    Chart2Component,
-    Charts1Component,
-    RegisterDocsComponent,
-    LegalIndividualPersonComponent
+    StaticInfoComponent,
+    CategoriesComponent,
+    ProjectsComponent,
+    StaticInfoComponent
   ],
   imports: [
     CommonModule,
@@ -45,11 +40,14 @@ import { LegalIndividualPersonComponent } from './components/legal-individual-pe
     MatMenuModule,
     InputTextModule,
     AccordionModule,
-    NgApexchartsModule,
-    ChartModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
-    
+    ProjectsService,
+    CategoriesService,
+    StaticInfoService
   ],
 })
 export class CabinetModule {}

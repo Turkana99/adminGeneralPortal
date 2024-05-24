@@ -1,0 +1,35 @@
+@import "../../../../styles/variables.scss";
+.projects{
+  overflow-y: auto;
+  h1 {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+    color: $title-color;
+  }
+  ::ng-deep .p-button {
+    border-radius: 8px;
+    background-color: $main-color;
+    border: none;
+  }
+  ::ng-deep .p-inputtext  {
+    width: 99%;
+  }
+  ::ng-deep .mat-mdc-header-cell div p{
+    text-align: center; 
+  }
+  .noData {
+    font-weight: bold;
+    font-size: 20px !important;
+    text-align: center !important;
+    color: $main-color;
+  }
+  .edit-icon {
+    color: $main-color;
+    cursor: pointer;
+  }
+  .delete-icon {
+    color: red;
+    cursor: pointer;
+  }
+}

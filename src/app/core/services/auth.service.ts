@@ -45,7 +45,7 @@ export class AuthService {
     };
 
     // Redirect the user to the main page after login
-    this.router.navigate(['/main']);
+    this.router.navigate(['/projects']);
   }
 
   // Method to handle user registration
@@ -59,7 +59,7 @@ export class AuthService {
     };
 
     // Redirect the user to the main page after registration
-    this.router.navigate(['/main']);
+    this.router.navigate(['/projects']);
   }
 
   // Method to handle user logout

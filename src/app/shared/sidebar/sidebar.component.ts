@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SharedService } from '../../core/services/shared.service';
-import { log } from 'console';
+import { SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,7 +10,15 @@ import { log } from 'console';
 export class SidebarComponent implements OnInit {
   minimizeSidebar = false;
   panelOpenState = false;
-  constructor(private sharedService: SharedService) {}
+  fhnLogo: SafeHtml | null = null;
+  @Input() iconUrl!: string;
+
+  constructor(
+    private sharedService: SharedService,
+    private cd:ChangeDetectorRef
+  ) {
+  }
+
   ngOnInit(): void {
     this.onSidebarToggle();
   }
@@ -20,4 +28,5 @@ export class SidebarComponent implements OnInit {
       console.log(this.minimizeSidebar);
     });
   }
+
 }

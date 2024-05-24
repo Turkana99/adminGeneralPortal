@@ -1,0 +1,136 @@
+<div class="projects px-3">
+  <div class="d-flex justify-content-between">
+    <div><h1 class="pt-3">Layihələr</h1></div>
+    <div class="d-flex align-items-center">
+      <p-button label="Əlavə et" icon="fa-solid fa-plus" />
+    </div>
+  </div>
+
+  <!--Filter-->
+  <div class="pt-3">
+    <form [formGroup]="filterForm">
+      <div class="d-flex gap-2">
+        <input
+          pInputText
+          type="text"
+          placeholder="Axtarış"
+          formControlName="name"
+          class="w-100"
+        />
+        <p-button type="submit" icon="pi pi-filter" class="ms-2"></p-button>
+        <p-button icon="pi pi-refresh" class="ms-2"></p-button>
+      </div>
+    </form>
+  </div>
+  <!--/Filter-->
+
+  <!-- spinner start-->
+  <div
+    class="w-100 my-5 py-5 d-flex justify-content-center align-items-center"
+    *ngIf="showSpinner"
+  >
+    <mat-spinner></mat-spinner>
+  </div>
+  <!-- spinner end-->
+
+  <!--Data table-->
+  <ng-container *ngIf="!showSpinner">
+    <div class="overflow-y-auto px-0 mt-4">
+      <mat-table
+        [dataSource]="projects"
+        class="material-table"
+        *ngIf="projects?.length!= null && hasResponse"
+      >
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Layihənin adı </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.name }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef> Təsvir</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.description }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Icon Column -->
+        <ng-container matColumnDef="icon">
+          <mat-header-cell *matHeaderCellDef> İkon</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.icon }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Url Column -->
+        <ng-container matColumnDef="url">
+          <mat-header-cell *matHeaderCellDef> Link</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.url }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- CategoryId Column -->
+        <ng-container matColumnDef="categoryId">
+          <mat-header-cell *matHeaderCellDef> Kateqoriya</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.categoryId }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="edit">
+          <mat-header-cell
+            *matHeaderCellDef
+            style="flex: unset !important; width: 45px !important"
+          >
+          </mat-header-cell>
+          <mat-cell
+            *matCellDef="let element"
+            style="flex: unset !important; width: 45px !important"
+          >
+            <i class="fa-solid fa-pen edit-icon custom-col-icon"></i>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <mat-header-cell
+            *matHeaderCellDef
+            style="flex: unset !important; width: 45px !important"
+          >
+          </mat-header-cell>
+          <mat-cell
+            *matCellDef="let element"
+            style="flex: unset !important; width: 45px !important"
+          >
+            <i class="fa-solid fa-trash delete-icon custom-col-icon"></i>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+        ></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+
+      <!-- No data template -->
+      <ng-container *ngIf="projects?.length==null && hasResponse">
+        <p class="noData py-4">Məlumat tapılmadı</p>
+      </ng-container>
+    </div>
+    <mat-paginator
+      *ngIf="projects?.length!= null && hasResponse"
+      class="custom-paginator"
+      [length]="totalData"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </ng-container>
+  <!--/Data table-->
+</div>

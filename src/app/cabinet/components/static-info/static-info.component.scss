@@ -1,0 +1,21 @@
+@import "../../../../styles/variables.scss";
+.static-info{
+  overflow-y: auto;
+  h1 {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+    color: $title-color;
+  }
+  ::ng-deep .p-button {
+    border-radius: 8px;
+    background-color: $main-color;
+    border: none;
+  }
+  ::ng-deep .p-inputtext  {
+    width: 99%;
+  }
+  ::ng-deep .mat-mdc-header-cell div p{
+    text-align: center; 
+  }
+}
