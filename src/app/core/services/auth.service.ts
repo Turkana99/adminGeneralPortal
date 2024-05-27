@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { UserInterface } from '../interfaces/user.interface';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { jwtDecode } from 'jwt-decode';
+import { Observable, map } from 'rxjs';
+import { environment } from '../../environment';
+import { log } from 'console';
 
 @Injectable({
   providedIn: 'root',
@@ -8,71 +13,85 @@ import { Router } from '@angular/router';
 export class AuthService {
   private _user: UserInterface | null = null;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: HttpClient) {
     this._restore();
   }
 
-  // Getter method to retrieve the user information
   private get user(): UserInterface | null {
     return this._user;
   }
 
-  // Setter method to update the user information and store it in local storage
   private set user(value: UserInterface | null) {
     this._user = value;
 
-    // If user data is provided, store it in local storage, otherwise clear local storage
     if (value) {
-      localStorage.setItem('user', JSON.stringify(value));
-    } else {
-      localStorage.removeItem('user');
-    }
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('user', JSON.stringify(value));
+      }
+    } else localStorage.clear();
   }
 
-  // Method to return a shallow copy of the user information
-  public get userInfo(): UserInterface | null {
-    return this._user ? { ...this._user } : null;
+  public get userInfo() {
+    return structuredClone(this._user);
   }
 
-  // Method to handle user login
-  public login(username: string, password: string) {
-    // For demonstration purposes, set user data to a mock user object
-    // In a real application, this would be replaced with authentication logic
-    this.user = {
-      id: 1,
-      email: username,
-      password,
-    };
+  public login(username: string, password: string): Observable<any> {
+    return this.http
+      .post<any>(environment.getAuth, { username, password })
+      .pipe(
+        map((response) => {
+          console.log('RESPONSE', response);
+          if (response.error) {
+            throw new Error('Login failed');
+          }
 
-    // Redirect the user to the main page after login
-    this.router.navigate(['/projects']);
+          // console.log(
+          //   'token',
+          //   this.getDecodedAccessToken(response.data.accessToken)
+          // );
+
+          this.user = this.getDecodedAccessToken(response.token);
+          console.log("User",this.user);
+          
+          localStorage.setItem('accessToken', response.token);
+          console.log( "Set", localStorage.setItem('accessToken', response.token));
+          
+          this.router.navigate(['/projects']);
+          return response;
+        })
+      );
   }
 
-  // Method to handle user registration
-  public register(username: string, password: string) {
-    // For demonstration purposes, set user data to a mock user object
-    // In a real application, this would be replaced with registration logic
-    this.user = {
-      id: 2,
-      email: username,
-      password,
-    };
-
-    // Redirect the user to the main page after registration
-    this.router.navigate(['/projects']);
-  }
-
-  // Method to handle user logout
   public logout() {
-    // Clear user data and redirect the user to the login page
     this.user = null;
     this.router.navigate(['/login']);
   }
 
-  // Method to restore user data from local storage when AuthService is initialized
   private _restore() {
-    // Retrieve user data from local storage and parse it as JSON
-    const userData = localStorage.getItem('user');
-    this._user = userData ? JSON.parse(userData) : null;
+    if (typeof localStorage !== 'undefined') {
+      this._user = JSON.parse(
+        localStorage.getItem('user') || 'null'
+      ) as UserInterface;
+    }
+  }
+
+  public isTokenExpired(token: string): boolean {
+    const decodedToken: any = this.getDecodedAccessToken(token);
+    const expiryDate: Date = new Date(decodedToken.exp * 1000);
+    const currentDate: Date = new Date();
+    return expiryDate < currentDate;
+  }
+
+  getDecodedAccessToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (Error) {
+      return null;
+    }
+  }
+
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('accessToken');
+    return !!token;
   }
 }

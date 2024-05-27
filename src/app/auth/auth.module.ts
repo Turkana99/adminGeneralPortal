@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResetPasswordComponent } from '../dialogs/reset-password/reset-password.component';
 import { ToastModule } from 'primeng/toast';
 import { MaterialModule } from '../material.module';
+import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -26,8 +28,10 @@ import { MaterialModule } from '../material.module';
     ButtonModule,
     PasswordModule,
     ToastModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule,
+    
 ],
-  providers: [],
+  providers: [MessageService],
 })
 export class AuthModule {}

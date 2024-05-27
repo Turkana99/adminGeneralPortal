@@ -1,5 +1,7 @@
+// src/app/core/interfaces/user.interface.ts
 export interface UserInterface {
-  id?: number;
-  email: string;
-  password: string;
+  id: number;
+  username: string;
+  password?: string;
+  token?: string;
 }

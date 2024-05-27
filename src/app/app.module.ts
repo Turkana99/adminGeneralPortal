@@ -6,6 +6,8 @@ import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TooltipModule } from 'primeng/tooltip';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,12 +15,18 @@ import { TooltipModule } from 'primeng/tooltip';
     BrowserModule, 
     AppRoutingModule,
     MaterialModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     TooltipModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent],
 })
