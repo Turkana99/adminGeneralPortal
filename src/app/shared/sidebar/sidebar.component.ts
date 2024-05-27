@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { SharedService } from '../../core/services/shared.service';
 import { SafeHtml } from '@angular/platform-browser';
 
@@ -15,9 +22,8 @@ export class SidebarComponent implements OnInit {
 
   constructor(
     private sharedService: SharedService,
-    private cd:ChangeDetectorRef
-  ) {
-  }
+    private cd: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.onSidebarToggle();
@@ -28,5 +34,4 @@ export class SidebarComponent implements OnInit {
       console.log(this.minimizeSidebar);
     });
   }
-
 }

@@ -34,7 +34,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-
 @NgModule({
   exports: [
     MatFormFieldModule,
@@ -92,9 +91,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatIconModule,
     MatMenuModule,
   ],
-  providers: [
-    MatDatepickerModule,
-    MatNativeDateModule
-  ],
+  providers: [MatDatepickerModule, MatNativeDateModule],
 })
 export class MaterialModule {}

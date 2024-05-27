@@ -12,20 +12,20 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    TooltipModule
+    TooltipModule,
   ],
   providers: [
     provideAnimationsAsync(),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],

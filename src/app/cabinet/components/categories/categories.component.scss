@@ -1,5 +1,5 @@
 @import "../../../../styles/variables.scss";
-.categories{
+.categories {
   overflow-y: auto;
   h1 {
     font-size: 30px;
@@ -12,11 +12,11 @@
     background-color: $main-color;
     border: none;
   }
-  ::ng-deep .p-inputtext  {
+  ::ng-deep .p-inputtext {
     width: 99%;
   }
-  ::ng-deep .mat-mdc-header-cell div p{
-    text-align: center; 
+  ::ng-deep .mat-mdc-header-cell div p {
+    text-align: center;
   }
   .edit-icon {
     color: $main-color;

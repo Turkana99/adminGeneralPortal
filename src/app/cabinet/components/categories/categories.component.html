@@ -85,7 +85,7 @@
       </mat-table>
 
       <!-- No data template -->
-      <ng-container *ngIf="categories?.length && hasResponse">
+      <ng-container *ngIf="categories?.length == null && hasResponse">
         <p class="noData py-4">Məlumat tapılmadı</p>
       </ng-container>
     </div>
